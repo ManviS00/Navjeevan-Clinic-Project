@@ -1,0 +1,11 @@
+import express from "express";
+import authMiddleware from "../middleware/authMiddleware.js";
+import roleMiddleware from "../middleware/roleMiddleware.js";
+import { createReview, getReviews, getMyReviews, getPublicReviews, updateReviewStatus } from "../controllers/reviewController.js";
+const router=express.Router();
+router.get("/public", getPublicReviews);
+router.get("/mine", authMiddleware, roleMiddleware("patient"), getMyReviews);
+router.get("/", authMiddleware, getReviews);
+router.post("/", authMiddleware, roleMiddleware("patient"), createReview);
+router.patch("/:id/status", authMiddleware, roleMiddleware("admin"), updateReviewStatus);
+export default router;

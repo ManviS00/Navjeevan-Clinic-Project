@@ -1,0 +1,12 @@
+import express from "express";
+import { health, chat, listConversations, createConversation, listMessages, addMessage, touchConversation, deleteConversation } from "../controllers/assistantController.js";
+const router=express.Router();
+router.get("/health", health);
+router.post("/chat", chat);
+router.get("/conversations", listConversations);
+router.post("/conversations", createConversation);
+router.get("/conversations/:id/messages", listMessages);
+router.post("/conversations/:id/messages", addMessage);
+router.patch("/conversations/:id", touchConversation);
+router.delete("/conversations/:id", deleteConversation);
+export default router;

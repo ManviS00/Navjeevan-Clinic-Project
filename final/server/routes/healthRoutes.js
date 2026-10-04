@@ -1,0 +1,10 @@
+import express from "express";
+import authMiddleware from "../middleware/authMiddleware.js";
+import {list,create,remove,update} from "../controllers/healthController.js";
+const router=express.Router();
+router.use(authMiddleware);
+router.get("/:kind",list);
+router.post("/:kind",create);
+router.put("/:kind/:id",update);
+router.delete("/:kind/:id",remove);
+export default router;

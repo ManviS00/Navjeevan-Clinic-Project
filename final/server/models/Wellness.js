@@ -1,0 +1,62 @@
+import mongoose from "mongoose";
+
+const wellnessSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
+
+    date: {
+      type: Date,
+      required: true,
+    },
+
+    mood: {
+      type: String,
+      enum: [
+        "Happy",
+        "Calm",
+        "Neutral",
+        "Sad",
+        "Anxious",
+        "Irritable",
+      ],
+      required: true,
+    },
+
+    symptoms: [
+      {
+        type: String,
+      },
+    ],
+
+    energyLevel: {
+      type: Number,
+      min: 1,
+      max: 5,
+      required: true,
+    },
+
+    sleepHours: {
+      type: Number,
+      min: 0,
+      max: 24,
+      required: true,
+    },
+
+    notes: {
+      type: String,
+      default: "",
+    },
+
+  },
+  {
+    timestamps: true,
+  }
+);
+
+
+export default mongoose.model("Wellness", wellnessSchema);
